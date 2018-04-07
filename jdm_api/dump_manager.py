@@ -76,9 +76,14 @@ class DumpManager(config.Loggable):
 def main():
     ''' Exemple '''
     import logging
+    import sys
+    if len(sys.argv)==1:
+        mots_a_tester = ["changer", "changeable"]
+    else:
+        mots_a_tester = [sys.argv[1]]
+        
     dump_manager = DumpManager()
     dump_manager.logger.setLevel(logging.DEBUG)
-    mots_a_tester = ["changer", "changeable"]
     for mot in mots_a_tester:
         print("Est-ce que le mot '" +mot+ "' existe?")
         print(dump_manager.has_dump(mot))

@@ -1,1 +1,0 @@
-\n// DUMP pour le terme '[a-zA-Z]+' \(eid=(?P<id>\d+)\)\n*(?P<desc>[\W\w]*)\n\n\n\n// les types de noeuds \(Nodes Types\) : nt;ntid;'ntname'
