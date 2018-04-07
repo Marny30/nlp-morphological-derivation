@@ -3,11 +3,14 @@
 # http://www.jeuxdemots.org/rezo-dump.php
 # dep : pip3 install --user beautifulsoup4
 
-class DumpManager():
+
+import config
+
+class DumpManager(config.Loggable):
     def __init__(self):
+        super().__init__()
         import os
-        self.path = "./dumps/"
-        self.localdumps = os.listdir(self.path)
+        self.localdumps = os.listdir(config.DUMP_PATH)
 
     def _getHTML(self, link):
         import urllib.request
@@ -16,14 +19,14 @@ class DumpManager():
             the_page = response.read()
         return the_page
 
-    def _extract_dump_from_html(self,html_txt):
+    def _extract_dump_from_html(self, html_txt):
         import bs4
         soup = bs4.BeautifulSoup(html_txt, 'html.parser')
         res = ""
         try:
             res = soup.findAll('code')[0].get_text()
         except:
-            raise ValueError('Mot non trouvable')
+            raise ValueError('Dump inexistant')
         return res
 
     def download_dump(self, mot):
@@ -36,7 +39,7 @@ class DumpManager():
         try:
             res = self._extract_dump_from_html(txt)
         except ValueError as verror:
-            print(str(verror) + ": " + mot)
+            self.logger.info(str(verror) + ": '" + mot +"'")
         return res
 
     def get_dump(self, mot):
@@ -45,14 +48,20 @@ class DumpManager():
         localement alors on le télécharge et on l'enregistre en local pour par
         la suite ne pas surcharger le serveur.
         '''
-        pathmot = self.path + mot
+        pathmot = config.DUMP_PATH + mot
+        self.logger.debug("Tentative d'obtention du dump associé à '"+str(mot)+"'")
         if mot in self.localdumps:  # Le dump est stocké en local
+            self.logger.debug("Dump '"+str(mot)+"' stocké locallement."
+                                     +" Lecture du fichier.")
             with open(pathmot, "r") as dumpfile:
                 res = dumpfile.read()
         else:                   # Le dump n'est pas stocké en local
+            self.logger.debug("Dump '"+str(mot)+"' Absent des dumps"
+                                     + "locaux. Tentative de téléchargement.")
             res = self.download_dump(mot)
             # enregistrement en local du dump s'il en existe un
             if res != '':
+                self.logger.debug("Dump '"+str(mot)+"' téléchargé. Enregistrement en local")
                 with open(pathmot, "w") as dumpfile:
                     dumpfile.write(res)
                 self.localdumps += [mot]
@@ -62,24 +71,20 @@ class DumpManager():
         '''Renvoie vrai si un mot existe dans la base de donnée JeuxDeMots,
         faux sinon
         '''
-        if mot in self.localdumps:
-            return True
-        else:
-            dump = self.get_dump(mot)
-            if dump != '':
-                return True
-        return False
+        return self.get_dump(mot)!=''
 
 def main():
     ''' Exemple '''
-    dm = DumpManager()
-    mots_a_tester = ["truc", "ordinateur", "QSDF"]
+    import logging
+    dump_manager = DumpManager()
+    dump_manager.logger.setLevel(logging.DEBUG)
+    mots_a_tester = ["changer", "changeable"]
     for mot in mots_a_tester:
-        print("Est-ce que le mot ", mot, " existe?")
-        print(dm.has_dump(mot))
+        print("Est-ce que le mot '" +mot+ "' existe?")
+        print(dump_manager.has_dump(mot))
         print()
-    print("Quel est le dump du mot 'lea'? (tronqué à 1000 caractères)")
-    print(dm.get_dump('lea')[:1000])
+    # print("Quel est le dump du mot 'lea'? (tronqué à 1000 caractères)")
+    # print(dm.get_dump('lea')[:1000])
 
 if __name__ == '__main__':
     main()
