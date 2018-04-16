@@ -12,6 +12,7 @@ def parseRule(line):
 def parseWord(line):
     tokens = tokens = line.split(";")
     return TaggedWord(tokens[1], tokens[2])
+
 def parse_file():
  PATH = "./jdm"
  with open(PATH, "r") as myfile:
@@ -28,6 +29,17 @@ def parse_file():
  print("Fichier parsé sans erreur")
  return [list_rule,list_word]
 
+def production():
+ list_melanger =list()
+    list_melanger =parse_file()
+    list_rule=list_melanger[0]
+    list_word=list_melanger[1]
+   
+    for word in list_word:	
+        for rule in list_rule:
+           if rule.isAppliable(word):
+              list_word.append(rule.production(word))	
+    return list_word
 
 def main():   
     list_melanger =list()
