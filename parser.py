@@ -4,25 +4,25 @@ from transformation import Rule, TaggedWord
 
 def parseRule(line):
     tokens = line.split(";")
-    return Rule(tokens[1], tokens[3], tokens[2], tokens[4])
+    ru= tokens[1].split("=>") 
+    return Rule(tokens[2],ru[0],ru[1],tokens[3],tokens[4])
     
 def parseWord(line):
     tokens = tokens = line.split(";")
     return TaggedWord(tokens[1], tokens[2])
 
 def main():
-    PATH = "./rules_sufix"
+    PATH = "./jdm"
     with open(PATH, "r") as myfile:
      fichier=myfile.read()
      lignes = fichier.split("\n")
-    for line in lignes: 
+     for line in lignes: 
       print(line)
       print(" devient ")      
       tokens =line.split(";")
-      
       if(tokens[0]== "RULE"):
       	parseRule(line)
-      else:	      
+      elif tokens[0]== "WORD":      
         parseWord(line)
       print("Fichier parsé sans erreur")
         

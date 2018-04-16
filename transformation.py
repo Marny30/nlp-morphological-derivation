@@ -2,6 +2,7 @@
 
 import re
 
+
 class TaggedWord():
     def __init__(self, word, pos):
         self.word = word
@@ -11,28 +12,30 @@ class TaggedWord():
 
 class Rule():
     ''' Règle de transformation de mot vers un autre '''
-    def __init__(self, input_pos, output_pos, input_regex, output_regex):
-        self.input_pos = input_pos
-        self.output_pos = output_pos
+    def __init__(self, commentaire, input_regex, output_regex,input_contrainte,output_contrainte):
+        self.commentaire = commentaire
         self.input_regex = input_regex
         self.output_regex = output_regex
-                
+        self.input_contrainte = input_contrainte
+        self.output_contrainte = output_contrainte
+
     def isAppliable(self, taggedword):
-        '''Renvoie vrai si la règle est applicable sur le mot renseigné. Il
-        s'agit de vérifier que le mot aie (1) la classe grammaticale
-        attendue et (2) que la forme du mot match avec le regex
-        attendu
-        '''
-        return (taggedword.pos == self.input_pos
+        print(taggedword.pos)
+        print(self.input_contrainte)
+        print(self.input_regex)
+        print(taggedword.word)
+        return (taggedword.pos == self.input_contrainte
                 and (re.match(self.input_regex, taggedword.word) is not None))
 
-    def production(self, taggedword):
-        ''' Application de la règle sur le mot renseigné. L'usage de cette fonction suppose que la règle est applicable (isAplliable) '''
-        return re.sub(self.input_regex, self.output_regex, taggedword.word)
+    def production(self, taggedword):      
+        regex=re.sub(self.input_regex,self.output_regex, taggedword.word)
+        return TaggedWord(regex, self.output_contrainte)	  
 
+#RULE;(.*)’er’=>\1’euse’ ; “Ver vers agent” (exemple : chanter => chanteuse);nom:infinitif;nom:agent
 def main():
-    mot_exemple = TaggedWord("manger", "VERBE_1er_groupe")
-    regle_exemple = Rule("VERBE_1er_groupe", "NOM", "(.*)er", "\\1eable")
+    mot_exemple = TaggedWord("manger", "Ver:infinitif")
+    regle_exemple = Rule("“Ver vers agent” (exemple : chanter => chanteuse)","(.*)er","\\1euse", "Ver:infinitif","nom:agent")
+    	
     print("La règle est elle applicable sur", mot_exemple, "?")
     print(regle_exemple.isAppliable(mot_exemple))
     print("Production:")
