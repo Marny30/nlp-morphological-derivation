@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
-import config
+# import config
 import re
-import jdm_api.dump_parser as dump_parser
+import dump_parser
+
 
 class DumpExtractor(dump_parser.DumpParser):
     NODE_DICT = {
@@ -110,7 +111,8 @@ def main():
         print("\t", x)
 
     rels_a_test = ["r_adj-verbe", "r_verbe-adj",
-                   "r_associated",
+                   # "r_associated",
+                   "r_isA",
                    "r_family",
                    "r_lemma",
                    "r_verbe-action", "r_action-verbe",
