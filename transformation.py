@@ -20,10 +20,6 @@ class Rule():
         self.output_contrainte = output_contrainte
 
     def isAppliable(self, taggedword):
-        print(taggedword.pos)
-        print(self.input_contrainte)
-        print(self.input_regex)
-        print(taggedword.word)
         return (taggedword.pos == self.input_contrainte
                 and (re.match(self.input_regex, taggedword.word) is not None))
 

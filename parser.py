@@ -2,6 +2,8 @@
 
 from transformation import Rule, TaggedWord
 
+list_rule=list()
+list_word=list()
 def parseRule(line):
     tokens = line.split(";")
     ru= tokens[1].split("=>") 
@@ -10,21 +12,34 @@ def parseRule(line):
 def parseWord(line):
     tokens = tokens = line.split(";")
     return TaggedWord(tokens[1], tokens[2])
-
-def main():
-    PATH = "./jdm"
-    with open(PATH, "r") as myfile:
+def parse_file():
+ PATH = "./jdm"
+ with open(PATH, "r") as myfile:
      fichier=myfile.read()
      lignes = fichier.split("\n")
      for line in lignes: 
-      print(line)
-      print(" devient ")      
+      #print(line)
+     # print(" devient ")      
       tokens =line.split(";")
       if(tokens[0]== "RULE"):
-      	parseRule(line)
+      	list_rule.append(parseRule(line))
       elif tokens[0]== "WORD":      
-        parseWord(line)
-      print("Fichier parsé sans erreur")
-        
+        list_word.append(parseWord(line))
+ print("Fichier parsé sans erreur")
+ return [list_rule,list_word]
+
+
+def main():   
+    list_melanger =list()
+    list_melanger =parse_file()
+    list_rule=list_melanger[0]
+    list_word=list_melanger[1]
+   
+    for word in list_word:	
+        for rule in list_rule:
+           if rule.isAppliable(word):
+              list_word.append(rule.production(word))	        
+
+
 if __name__ == '__main__':
     main()
