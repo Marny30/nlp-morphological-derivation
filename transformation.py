@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+# -*- coding: utf-8 -*-
 import re
 
 
@@ -11,7 +11,6 @@ class TaggedWord():
         return self.word+"[" + self.pos + "]"
 
 class Rule():
-    ''' Règle de transformation de mot vers un autre '''
     def __init__(self, commentaire, input_regex, output_regex,input_contrainte,output_contrainte):
         self.commentaire = commentaire
         self.input_regex = input_regex
@@ -27,11 +26,9 @@ class Rule():
         regex=re.sub(self.input_regex,self.output_regex, taggedword.word)
         return TaggedWord(regex, self.output_contrainte)	  
 
-#RULE;(.*)’er’=>\1’euse’ ; “Ver vers agent” (exemple : chanter => chanteuse);nom:infinitif;nom:agent
 def main():
     mot_exemple = TaggedWord("manger", "Ver:infinitif")
-    regle_exemple = Rule("“Ver vers agent” (exemple : chanter => chanteuse)","(.*)er","\\1euse", "Ver:infinitif","nom:agent")
-    	
+    regle_exemple = Rule("Ver vers agent (exemple : chanter => chanteuse)","(.*)er","\\1euse", "Ver:infinitif","nom:agent")
     print("La règle est elle applicable sur", mot_exemple, "?")
     print(regle_exemple.isAppliable(mot_exemple))
     print("Production:")
