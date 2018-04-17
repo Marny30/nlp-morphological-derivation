@@ -5,7 +5,7 @@ import re
 import dump_parser
 
 
-class DumpExtractor(dump_parser.DumpParser):
+class DumpAnalyzer(dump_parser.DumpParser):
     NODE_DICT = {
         'n_term':1,
         'n_form':2,
@@ -34,7 +34,7 @@ class DumpExtractor(dump_parser.DumpParser):
         return res
 
     def get_nodes_by_typename(self, name):
-        return self.get_nodes_by_type(DumpExtractor.NODE_DICT[name])
+        return self.get_nodes_by_type(DumpAnalyzer.NODE_DICT[name])
 
     def get_rel_by_id(self, rid, incoming=True):
         res = None
@@ -59,6 +59,8 @@ class DumpExtractor(dump_parser.DumpParser):
         return res
 
     def get_rels_by_typename(self, relname,  incoming=True):
+        if relname not in self.rel_dict.keys():
+            return []
         return self.get_rels_by_type(self.rel_dict[relname], incoming)
 
     def _rel_to_string(self, rel):
@@ -90,23 +92,23 @@ def main():
     else:
         word = sys.argv[1]
         
-    extractor = DumpExtractor(word)
-    extractor.logger.setLevel(logging.DEBUG)
-    # print(extractor)
-    # extractor.__str__()
+    analyzer = DumpAnalyzer(word)
+    analyzer.logger.setLevel(logging.DEBUG)
+    # print(analyzer)
+    # analyzer.__str__()
 
     print("Pos de '" + word + "' ?")
-    tmp = extractor.get_nodes_by_typename("n_pos")
+    tmp = analyzer.get_nodes_by_typename("n_pos")
     for x in tmp:
         print("\t", x)
 
     print("node n_data?")
-    tmp = extractor.get_nodes_by_typename("n_data")
+    tmp = analyzer.get_nodes_by_typename("n_data")
     for x in tmp:
         print("\t", x)
         
     print("rel n° 12345 '" + word + "' ?")
-    tmp = extractor.get_rels_by_type(12345)
+    tmp = analyzer.get_rels_by_type(12345)
     for x in tmp:
         print("\t", x)
 
@@ -125,17 +127,17 @@ def main():
     ]
     print("relations jugées intéressantes")
     for relname in rels_a_test:
-        if not relname in extractor.rel_dict.keys():
+        if not relname in analyzer.rel_dict.keys():
             continue
         print("  " + relname)
-        tmp = extractor.get_rels_by_typename(relname, incoming=True)
+        tmp = analyzer.get_rels_by_typename(relname, incoming=True)
         for x in tmp:
-            print("    in:\t", extractor._rel_to_string(x))
-        tmp = extractor.get_rels_by_typename(relname, incoming=False)
+            print("    in:\t", analyzer._rel_to_string(x))
+        tmp = analyzer.get_rels_by_typename(relname, incoming=False)
         for x in tmp:
-            print("    out:", extractor._rel_to_string(x))
+            print("    out:", analyzer._rel_to_string(x))
             
-    # print(extractor.get_rels_by_type(43, incoming=False))
-    # print(extractor)
+    # print(analyzer.get_rels_by_type(43, incoming=False))
+    # print(analyzer)
 if __name__ == '__main__':
     main()
