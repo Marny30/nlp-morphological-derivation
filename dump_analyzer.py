@@ -91,7 +91,13 @@ def main():
         word = "manger"
     else:
         word = sys.argv[1]
-        
+    import dump_manager
+    
+    dm = dump_manager.DumpManager()
+    res = dm.get_dump(word)
+    if not res:
+        return
+    
     analyzer = DumpAnalyzer(word)
     analyzer.logger.setLevel(logging.DEBUG)
     # print(analyzer)
