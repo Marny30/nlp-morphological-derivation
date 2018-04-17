@@ -1,6 +1,6 @@
 import logging
 
-logging.basicConfig(format="%(levelname)-7s %(name)-15s%(lineno)s:%(message)s", level=logging.DEBUG)
+logging.basicConfig(format="%(levelname)-7s %(name)-23s%(lineno)s:%(message)s", level=logging.DEBUG)
 DUMP_PATH = "./dumps/"
 DUMP_EXTRACTION_REGEX_PATH = "./regex_dump_extraction.txt"
 
