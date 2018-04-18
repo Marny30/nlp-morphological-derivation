@@ -6,8 +6,20 @@ list_rule=list()
 list_word=list()
 def parseRule(line):
     tokens = line.split(";")
-    ru= tokens[1].split("=>") 
-    return Rule(tokens[2],ru[0],ru[1],tokens[3],tokens[4])
+    ru= tokens[1].split("=>")
+
+    list_contrainte_in=list()
+    crt=tokens[3].split(",")
+    for r in crt:
+        list_contrainte_in.append(r)
+
+    list_contrainte_out=list()
+    crts=tokens[3].split(",")
+    for r1 in crts:
+        list_contrainte_out.append(r1)
+
+    return Rule(tokens[2],ru[0],ru[1], list_contrainte_in, list_contrainte_out)
+    # n_pos Nom:Mas+SG", "Y r_lemma X
     
 def parseWord(line):
     tokens = line.split(";")
@@ -29,23 +41,23 @@ def parse_file():
  return [list_rule,list_word]
 
 def production():
- list_melanger =list()
- list_melanger =parse_file()
- list_rule=list_melanger[0]
- list_word=list_melanger[1]
- liste_triplet_production = list()  
- for word in list_word:	
+    list_melanger = list()
+    list_melanger = parse_file()
+    list_rule=list_melanger[0]
+    list_word=list_melanger[1]
+    liste_triplet_production = list()
+    for word in list_word:	
         for rule in list_rule:
-           if rule.isAppliable(word):
-               # if doublon(word,list_word) == False:
-               liste_triplet_production.append([word, rule, rule.production(word)])
- return liste_triplet_production
+            if rule.isAppliable(word):
+                # if doublon(word,list_word) == False:
+                liste_triplet_production.append([word, rule, rule.production(word)])
+    return liste_triplet_production
 
 
 def production_label(list_triplet_production):
     return_list= list()
-    for triplet in list_triplet_production:
         # print(triplet[0].word)
+    for triplet in list_triplet_production:
         return_list.append([triplet[0].word,triplet[1],triplet[2].word])
     return return_list
 
