@@ -19,7 +19,7 @@ class Rule():
         self.output_contrainte = output_contrainte
 
     def isAppliable(self, taggedword):
-        return (taggedword.pos == self.input_contrainte
+        return (taggedword.pos in self.input_contrainte
                 and (re.match(self.input_regex, taggedword.word) is not None))
 
     def production(self, taggedword):      
@@ -36,3 +36,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

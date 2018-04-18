@@ -33,26 +33,48 @@ def production():
  list_melanger =parse_file()
  list_rule=list_melanger[0]
  list_word=list_melanger[1]
-   
+ liste_triplet_production = list()  
  for word in list_word:	
         for rule in list_rule:
            if rule.isAppliable(word):
-	      if doublon(word,list_word) == False:	
-               list_word.append(rule.production(word))	
- return list_word
+               # if doublon(word,list_word) == False:
+               liste_triplet_production.append([word, rule, rule.production(word)])
+ return liste_triplet_production
+
+
+def production_label(list_triplet_production):
+    return_list= list()
+    for triplet in list_triplet_production:
+        # print(triplet[0].word)
+        return_list.append([triplet[0].word,triplet[1],triplet[2].word])
+    return return_list
+
 
 def doublon(word,list_word):
    for w in list_word:
-	if w == word :
-	 return True
+     if w == word:
+       return True
    return False	
 
-
-
+def find_word(word,liste_triplet_production):
+    liste_triplet_find =list() 	
+    # print("word", word)
+    # print("1ermot")	
+    for triplet in liste_triplet_production:
+         print("triplet[0]", str(triplet[0]))
+         if word == triplet[0].word:
+             liste_triplet_find.append(triplet)
+    return liste_triplet_find
 	
 def main():   
-   production()     
-
-
+   triplet= production()
+    
+   marin=production_label(triplet)
+   print("je marche")
+   for m in marin:
+       print(str(m))
+   #     print(m[1])
+   #     print(m[2])
+   
 if __name__ == '__main__':
     main()
