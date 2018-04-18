@@ -14,7 +14,7 @@ def parseRule(line):
         list_contrainte_in.append(r)
 
     list_contrainte_out=list()
-    crts=tokens[3].split(",")
+    crts=tokens[4].split(",")
     for r1 in crts:
         list_contrainte_out.append(r1)
 
