@@ -52,7 +52,7 @@ class DumpManager(config.Loggable):
         pathmot = config.DUMP_PATH + mot
         self.logger.debug("Tentative d'obtention du dump associé à '"+str(mot)+"'")
         if mot in self.localdumps:  # Le dump est stocké en local
-            self.logger.debug("Dump '"+str(mot)+"' stocké locallement."
+            self.logger.debug("Dump '"+str(mot)+"' stocké localement."
                                      +" Lecture du fichier.")
             with open(pathmot, "r") as dumpfile:
                 res = dumpfile.read()
