@@ -1,2 +1,3 @@
 RULE;(.*)er=>\1eur; “Ver vers agent” (exemple : chanter => chanteur);n_pos Ver:Inf,n_data Ver:Groupe1;Y r_agent-1 X,n_pos Nom:Mas+SG
 WORD;chanter;n_pos Ver:Inf
+WORD;jardiner;n_pos Ver:Inf
