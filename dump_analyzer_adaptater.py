@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 
 import dump_analyzer
 class DumpAnalyzerAdaptater(dump_analyzer.DumpAnalyzer):

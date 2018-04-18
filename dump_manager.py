@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 
 # http://www.jeuxdemots.org/rezo-dump.php
 # dep : pip3 install --user beautifulsoup4
@@ -8,7 +9,7 @@ import config
 
 class DumpManager(config.Loggable):
     def __init__(self):
-        super().__init__()
+        super(DumpManager, self).__init__()
         import os
         self.localdumps = os.listdir(config.DUMP_PATH)
 

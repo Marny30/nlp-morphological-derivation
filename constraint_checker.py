@@ -1,7 +1,8 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 
 from transformation import TaggedWord, Rule
-from typing import List
+# from typing import List
 import config
 import dump_analyzer_factory
 
@@ -62,7 +63,7 @@ class ProductionChecker(config.Loggable):
         self.logger.info('Contrainte "' + constraint + '" non vérifiée.')
         return False
         
-    def _check(self, word, constraint_list : List[str], otherword):
+    def _check(self, word, constraint_list, otherword):
         res = True
         analyzer = ProductionChecker.dump_factory.create(word)
         if not analyzer:
@@ -99,7 +100,7 @@ class ProductionChecker(config.Loggable):
 def main():
     import sys
     import dump_analyzer_factory
-    from parser import parseRule
+    # from parser import parseRule
     if len(sys.argv)==1:
         word = "changer"
     else:
@@ -109,10 +110,19 @@ def main():
     # rule = Rule("“Ver vers agent” (exemple : chanter => chanteuse)","(.*)er","\\1euse", ["n_pos Ver:Inf"],["n_pos Nom:Fem+SG"])
     # word_in = "chanter"
     # word_out = rule.production(TaggedWord("chanter","Ver:Inf"))
-    rule = Rule("'blablabla' (exemple : jardin => jardinier)","(.*)in","\\1inier", ["n_pos Nom:Mas+SG"],["n_pos Nom:Mas+SG", "X r_lieu-1 Y"])
 
-    word_in = "jardin"
-    word_out = rule.production(TaggedWord("jardin","Nom:Mas+SG"))
+        # exemple jardin => jardinier #########################################
+    # rule = Rule("'blablabla' (exemple : jardin => jardinier)","(.*)in","\\1inier", ["n_pos Nom:Mas+SG"],["n_pos Nom:Mas+SG", "X r_lieu-1 Y"])
+
+    # word_in = "jardin"
+    # word_out = rule.production(TaggedWord("jardin","Nom:Mas+SG"))
+    # word_out = word_out.word
+
+        # exemple frapper => frappement ########################################
+    rule = Rule("'blablabla' (exemple : frapper => frappement)","(.*)er","\\1ette", ["n_pos Ver:Inf"],["n_pos Nom:Mas+SG", "Y r_lemma X"])
+
+    word_in = "frapper"
+    word_out = rule.production(TaggedWord("frapper","Nom:Mas+SG"))
     word_out = word_out.word
     
     checker = ProductionChecker(word_in, rule, word_out)
