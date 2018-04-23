@@ -27,7 +27,7 @@ class Noeud(config.Loggable):
 
 class DumpParser(config.Loggable):
     # ref : https://regex101.com/
-    META_INFO_REGEX = "\n*// DUMP pour le terme '[a-zA-Z]+' \(eid=(?P<id>\d+)\)\n*(?P<desc>[\W\w]*)\n\n\n\n"
+    META_INFO_REGEX = "\n*// DUMP pour le terme '[a-zA-ZÀ-ÿ]+' \(eid=(?P<id>\d+)\)\n*(?P<desc>[\W\w]*)\n\n\n\n"
     # NODE_REGEX = "// les noeuds/termes \(Entries\) : e;eid;'name';type;w;'formated name' \n\n(?P<nodes>[\d\D]*)\n\n// les types de relations"
     # REL_IN_REGEX = "// les relations ent.*\n(?P<rel_in>[\w\W]*)\n\n// END"
     # REL_OUT_REGEX = "// les relations sort.*\n\n(?P<rel_out>[\w\W]*)\n\n// les relations"
