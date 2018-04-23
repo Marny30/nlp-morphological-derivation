@@ -40,7 +40,7 @@ class DumpManager(config.Loggable):
         try:
             res = self._extract_dump_from_html(txt)
         except ValueError as verror:
-            self.logger.info(str(verror) + ": '" + mot +"'")
+            self.logger.debug(str(verror) + ": '" + mot +"'")
         return res
 
     def get_dump(self, mot):
@@ -52,12 +52,12 @@ class DumpManager(config.Loggable):
         pathmot = config.DUMP_PATH + mot
         self.logger.debug("Tentative d'obtention du dump associé à '"+str(mot)+"'")
         if mot in self.localdumps:  # Le dump est stocké en local
-            self.logger.debug("Dump '"+str(mot)+"' stocké localement."
+            self.logger.info("Dump '"+str(mot)+"' stocké localement."
                                      +" Lecture du fichier.")
             with open(pathmot, "r") as dumpfile:
                 res = dumpfile.read()
         else:                   # Le dump n'est pas stocké en local
-            self.logger.debug("Dump '"+str(mot)+"' Absent des dumps"
+            self.logger.debug("Dump '"+str(mot)+"' Absent des dumps "
                                      + "locaux. Tentative de téléchargement.")
             res = self.download_dump(mot)
             # enregistrement en local du dump s'il en existe un
