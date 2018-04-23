@@ -14,9 +14,10 @@ class DumpManager(config.Loggable):
         self.localdumps = os.listdir(config.DUMP_PATH)
 
     def _getHTML(self, link):
-        import urllib.request
-        req = urllib.request.Request(link)
-        with urllib.request.urlopen(req) as response:
+        from urllib import request
+        print(link)
+        req = request.Request(link)
+        with request.urlopen(req) as response:
             the_page = response.read()
         return the_page
 
@@ -34,7 +35,10 @@ class DumpManager(config.Loggable):
         '''Téléchargement le dump JeuxDeMots d'un mot donné. Si le mot
         n'existe pas, la fonction renvoie une chaîne vide
         '''
-        url = "http://www.jeuxdemots.org/rezo-dump.php?gotermsubmit=Chercher&gotermrel="+mot+"&rel="
+        from urllib.parse import quote
+        mot_formatted = quote(mot.encode('latin1'))        # on escape les caractères UTF8 s'il y en a
+        print(mot_formatted)
+        url = "http://www.jeuxdemots.org/rezo-dump.php?gotermsubmit=Chercher&gotermrel="+mot_formatted+"&rel="
         txt = self._getHTML(url)
         res = ""
         try:
