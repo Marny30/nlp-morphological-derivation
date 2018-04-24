@@ -14,9 +14,9 @@ class DumpManager(config.Loggable):
         self.localdumps = os.listdir(config.DUMP_PATH)
 
     def _getHTML(self, link):
-        import urllib.request
-        req = urllib.request.Request(link)
-        with urllib.request.urlopen(req) as response:
+        from urllib import request
+        req = request.Request(link)
+        with request.urlopen(req) as response:
             the_page = response.read()
         return the_page
 
@@ -34,13 +34,15 @@ class DumpManager(config.Loggable):
         '''Téléchargement le dump JeuxDeMots d'un mot donné. Si le mot
         n'existe pas, la fonction renvoie une chaîne vide
         '''
-        url = "http://www.jeuxdemots.org/rezo-dump.php?gotermsubmit=Chercher&gotermrel="+mot+"&rel="
+        from urllib.parse import quote
+        mot_formatted = quote(mot.encode('latin1'))        # on escape les caractères UTF8 s'il y en a
+        url = "http://www.jeuxdemots.org/rezo-dump.php?gotermsubmit=Chercher&gotermrel="+mot_formatted+"&rel="
         txt = self._getHTML(url)
         res = ""
         try:
             res = self._extract_dump_from_html(txt)
         except ValueError as verror:
-            self.logger.info(str(verror) + ": '" + mot +"'")
+            self.logger.debug(str(verror) + ": '" + mot +"'")
         return res
 
     def get_dump(self, mot):
@@ -52,12 +54,12 @@ class DumpManager(config.Loggable):
         pathmot = config.DUMP_PATH + mot
         self.logger.debug("Tentative d'obtention du dump associé à '"+str(mot)+"'")
         if mot in self.localdumps:  # Le dump est stocké en local
-            self.logger.debug("Dump '"+str(mot)+"' stocké localement."
+            self.logger.info("Dump '"+str(mot)+"' stocké localement."
                                      +" Lecture du fichier.")
             with open(pathmot, "r") as dumpfile:
                 res = dumpfile.read()
         else:                   # Le dump n'est pas stocké en local
-            self.logger.debug("Dump '"+str(mot)+"' Absent des dumps"
+            self.logger.debug("Dump '"+str(mot)+"' Absent des dumps "
                                      + "locaux. Tentative de téléchargement.")
             res = self.download_dump(mot)
             # enregistrement en local du dump s'il en existe un

@@ -27,7 +27,7 @@ class Noeud(config.Loggable):
 
 class DumpParser(config.Loggable):
     # ref : https://regex101.com/
-    META_INFO_REGEX = "\n*// DUMP pour le terme '[a-zA-Z]+' \(eid=(?P<id>\d+)\)\n*(?P<desc>[\W\w]*)\n\n\n\n"
+    META_INFO_REGEX = "\n*// DUMP pour le terme '[a-zA-ZÀ-ÿ]+' \(eid=(?P<id>\d+)\)\n*(?P<desc>[\W\w]*)\n\n\n\n"
     # NODE_REGEX = "// les noeuds/termes \(Entries\) : e;eid;'name';type;w;'formated name' \n\n(?P<nodes>[\d\D]*)\n\n// les types de relations"
     # REL_IN_REGEX = "// les relations ent.*\n(?P<rel_in>[\w\W]*)\n\n// END"
     # REL_OUT_REGEX = "// les relations sort.*\n\n(?P<rel_out>[\w\W]*)\n\n// les relations"
@@ -42,6 +42,7 @@ class DumpParser(config.Loggable):
         with open(path) as dumpfile:
             dumptext = dumpfile.read()
         self._parse_info_from_text(dumptext)
+        self.logger.debug("fichier " + dumpname + " parsé")
         
     def _parse_info_from_text(self, dumptext):
         assert len(dumptext) > 0
@@ -50,20 +51,20 @@ class DumpParser(config.Loggable):
             for line in text.split('\n'):
                 res+=[Relation(line)]
             return res
-        self.logger.debug("Extraction de données")
+        # self.logger.debug("Extraction de données")
         matcher = re.match(DumpParser.META_INFO_REGEX, dumptext)
         self.desc = matcher.group('desc')
         self.id = (matcher.group('id'))
 
         splitted_dumptext = dumptext.split('\n')
 
-        self.logger.debug("parsing metadata")
+        # self.logger.debug("parsing metadata")
         for i, line in enumerate(splitted_dumptext):
             if line == "// les noeuds/termes (Entries) : e;eid;'name';type;w;'formated name' ":
                 break
         splitted_dumptext = splitted_dumptext[i+2:]
         
-        self.logger.debug("parsing nodes")
+        # self.logger.debug("parsing nodes")
         self.nodes = []
         for i, line in enumerate(splitted_dumptext):
             if line == "":
@@ -73,7 +74,7 @@ class DumpParser(config.Loggable):
         splitted_dumptext = splitted_dumptext[i+3:]
 
         self.rel_dict = {}
-        self.logger.debug("parsing relations dict")
+        # self.logger.debug("parsing relations dict")
         for i, line in enumerate(splitted_dumptext):
             if line == "":
                 break
@@ -85,7 +86,7 @@ class DumpParser(config.Loggable):
         splitted_dumptext = splitted_dumptext[i+3:]
 
         self.rel_out = []
-        self.logger.debug("parsing outgoing relations")
+        # self.logger.debug("parsing outgoing relations")
         for i, line in enumerate(splitted_dumptext):
             if line == "":
                 break
@@ -94,13 +95,12 @@ class DumpParser(config.Loggable):
         splitted_dumptext = splitted_dumptext[i+3:]
 
         self.rel_in = []
-        self.logger.debug("parsing incoming relations")
+        # self.logger.debug("parsing incoming relations")
         for i, line in enumerate(splitted_dumptext):
             if line == "":
                 break
             else:
                 self.rel_in += [Relation(line)]
-        self.logger.debug("parsing finished")
         
     def __str__(self):
         res = "NODES\n"

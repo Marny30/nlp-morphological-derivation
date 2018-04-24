@@ -6,17 +6,15 @@ from transformation import TaggedWord, Rule
 import config
 import dump_analyzer_factory
 
-class ConstraintChecker:
-    @staticmethod
-    
-    def check(expected_POS, POS_list):
-        return expected_POS in POS_list
-    
+class ConstraintCheckException(Exception):
+    pass
+
 class ProductionChecker(config.Loggable):
     dump_factory = dump_analyzer_factory.Dump_analyzer_factory()
     
     def __init__(self, word_in, Rule, word_out):
         super().__init__()
+        self.logger.info("Test transformation " + word_in + "-->" + word_out + " [" + Rule.commentaire+ "]")
         self.word_in = word_in
         self.Rule = Rule
         self.word_out = word_out
@@ -44,7 +42,7 @@ class ProductionChecker(config.Loggable):
             node2label = self.word_in
         elif node2label == 'Y':
             node2label = self.word_out
-        
+
         listrels = set()
         listrels.update(analyzer.get_rels_by_typename(relname, incoming=True))
         listrels.update(analyzer.get_rels_by_typename(relname, incoming=False))
@@ -63,36 +61,49 @@ class ProductionChecker(config.Loggable):
         self.logger.info('Contrainte "' + constraint + '" non vérifiée.')
         return False
         
-    def _check(self, word, constraint_list, otherword):
-        res = True
-        analyzer = ProductionChecker.dump_factory.create(word)
+    def _check(self, word, constraint_list, otherword, analyzer):
+        # analyzer = ProductionChecker.dump_factory.create(word)
         if not analyzer:
             self.logger.warning("Le mot " + str(word) + " n'existe pas dans JDM")
-            return False
+            raise LookupError('mot inexistant dans JDM')
+        
         for constraint in constraint_list:
             self.logger.debug("Traitement de la contrainte " + str(constraint))
             # relname, elem = constraint.split()
             tokens = constraint.split()
             if len(tokens)==2 and tokens[0].startswith('n_'):  # node (relname, elem)
             # if relname.startswith('n_'):
-                tmp =  self._check_nodeconstraint(analyzer, constraint)
-                if not tmp: return False
+                if not self._check_nodeconstraint(analyzer, constraint):
+                    raise ConstraintCheckException('Contrainte noeud "' + constraint + '" non vérifiée.')
             elif len(tokens)==3 and tokens[1].startswith('r_'):  # rel (node1 label, relname, node2 label)
-                tmp =  self._check_relconstraint(analyzer, word, constraint)
-                if not tmp : return False
+                if not self._check_relconstraint(analyzer, word, constraint):
+                    raise ConstraintCheckException('Contrainte rel "' + constraint + '" non vérifiée.')
             else:
-                self.logger.error('type de contrainte inconnue : "' + constraint + '"')
-                return 0
-        return res
+                if len(tokens)==3:
+                    constraint = tokens[1]
+                else:
+                    constraint = tokens[0]
+                raise SyntaxError('type de contrainte inconnue : ' + constraint)
+        return True
         
     def check(self):
-        self.logger.debug("Check input")
-        tmp = self._check(self.word_in, self.Rule.input_contrainte, self.word_out)
-        if not tmp: return False
+        analyzer_in = ProductionChecker.dump_factory.create(self.word_in)
+        analyzer_out = ProductionChecker.dump_factory.create(self.word_out)
+        if not analyzer_in:
+            self.logger.warning("Le mot " + str(self.word_in) + " n'existe pas dans JDM")
+            raise LookupError('mot inexistant dans JDM')
+        if not analyzer_out:
+            self.logger.warning("Le mot " + str(self.word_out) + " n'existe pas dans JDM")
+            raise LookupError('mot inexistant dans JDM')
+        try:
+            self._check(self.word_in, self.Rule.input_contrainte, self.word_out, analyzer_in)
+        except Exception as e:
+            raise e
         
-        self.logger.debug("Check output")
-        tmp = self._check(self.word_out, self.Rule.output_contrainte, self.word_in)
-        if not tmp: return False
+        try:
+            self._check(self.word_out, self.Rule.output_contrainte, self.word_in, analyzer_out)
+        except Exception as e:
+            raise e
 
         self.logger.info("transformation validée")
         return True
@@ -119,7 +130,7 @@ def main():
     # word_out = word_out.word
 
         # exemple frapper => frappement ########################################
-    rule = Rule("'blablabla' (exemple : frapper => frappement)","(.*)er","\\1ette", ["n_pos Ver:Inf"],["n_pos Nom:Mas+SG", "Y r_lemma X"])
+    rule = Rule("'blablabla' (exemple : frapper => frappement)","(.*)er","\\1ement", ["n_pos Ver:Inf"],["n_pos Nom:Mas+SG", "Y r_lemma X"])
 
     word_in = "frapper"
     word_out = rule.production(TaggedWord("frapper","Nom:Mas+SG"))
