@@ -18,6 +18,16 @@ class Noeud(config.Loggable):
     def __init__(self, string):
         tokens = string.split(";")
         self.id = int(tokens[1])
+
+        tmp = tokens[2:]
+        # pb : si ";" dans description alors ça casse.
+        # On sait que le label est encerclé par des quotes ( ' ).
+        # On se propose la chose suivante : si le token obtenu ne fini pas par une quote, c'est que ce problème a été rencontré.
+        # alors, on fusionne le token label avec le token suivant pour pallier à ce pb.
+                      
+        while tokens[2][-1]!="'":
+            tokens[2] = ";".join(tokens[2:4])
+            tokens[3:] = tokens[4:]
         self.label = tokens[2][1:-1]  # on enlève les '' au début à et
                                       # à la fin
         self.type = int(tokens[3])
@@ -116,7 +126,11 @@ class DumpParser(config.Loggable):
 
 def main():
     import logging
-    word = "fioriture"
+    import sys
+    if len(sys.argv)==1:
+        word = "fioriture"
+    else:
+        word = sys.argv[1]
     dparser = DumpParser(word)
     dparser.logger.setLevel(logging.DEBUG)
     print(dparser)
