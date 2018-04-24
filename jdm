@@ -3,64 +3,64 @@ RULE;(.*)er=>\1euse; “Ver vers agent” (exemple : chanter => chanteuse);n_pos
 RULE;(.*)ger=>\1geoire; “Ver vers lieu” (exemple : manger => mangeoire);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:
 RULE;(.*)er=>\1oire; “Ver vers lieu” (exemple : patiner => patinoire);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:
 RULE;(.*)er=>\1oir; “Ver vers lieu” (exemple : egoutter => egouttoir);n_pos Ver:Inf,n_data Ver:Groupe1;
-RULE;(.*)er=>\1age; “Ver vers nom d’action” (exemple : bavarder => bavardage);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:Mas+SG
-RULE;(.*)ner=>\1nier;"Ver vers adj" (exemple: miner => minier );n_pos Ver:Inf,n_data Ver:Groupe1;Adj:Mas+SG
-RULE;(.*)er=>\1ette;"Ver vers nom objet" (exemple: trotiner => trotinette );n_pos Ver:Inf,n_data Ver:Groupe1;Adj:Fem+SG
-RULE;(.*)uire=>\1ction; “Ver vers nom” (exemple : induire => induction);n_pos Ver:Inf;n_pos Nom:Fem+SG
+RULE;(.*)er=>\1age; “Ver vers Nom d’action” (exemple : bavarder => bavardage);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:Mas+SG
+RULE;(.*)ner=>\1nier;"Ver vers Adj" (exemple: miner => minier );n_pos Ver:Inf,n_data Ver:Groupe1;Adj:Mas+SG
+RULE;(.*)er=>\1ette;"Ver vers Nom objet" (exemple: trotiner => trotinette );n_pos Ver:Inf,n_data Ver:Groupe1;Adj:Fem+SG
+RULE;(.*)uire=>\1ction; “Ver vers Nom” (exemple : induire => induction);n_pos Ver:Inf;n_pos Nom:Fem+SG
 RULE;(.*)uire=>\1cteur; “Ver vers agent” (exemple : conduire => conducteur);n_pos Ver:Inf;Y r_agent-1 X,n_pos Nom:Mas+SG
 RULE;(.*)uire=>\1ctrice; “Ver vers agent” (exemple : conduire => conductrice);n_pos Ver:Inf;Y r_agent-1 X,n_pos Nom:Fem+SG
-RULE;(.*)ger=>\1gement; “Ver vers nom” (exemple : déranger => dérangement);n_pos Ver:Inf;n_pos Nom:Mas+SG
-
-
-
-RULE;(.*)lir=>\1lissage; “Ver vers nom” (exemple : remplir => remplissage );n_pos Ver:Inf;n_pos Nom:Mas+SG
-RULE;(.*)dir=>\1d; “Ver vers nom” (exemple : rebondir =>rebond);Ver:infinitif;nom:none
-RULE;(.*)ter=>\1tement; “Ver vers nom” (exemple : endetter => endettement);Ver:infinitif;nom:none
-RULE;(.*)eur => \1euse; “nomFeminin vers nomMasculin” (exemple : danseur->danseuse);nom:feminin,singulier;nom:masculin,singulier
-RULE;(.*)er=>\1ant;"Ver vers adjectif" (exemple : choquer->choquant);Ver:infinitif;adj:none
-RULE;(.*)er=>\1ant;"Ver vers participe present" (exemple : donner->donnant);Ver:infinitif;Ver:participe_present
-RULE;(.*)er=>\1e;"Ver vers Ver p1" (exemple : marcher->marche);Ver:infinitif;Ver:present_1personne
-RULE;(.*)er=>\1e;"Ver vers nom" (exemple : marcher->marche);Ver:infinitif;nom:action
-RULE;(.*)ister=>\1istance;"Ver vers nom" (exemple : resister->resistance);Ver:infinitif;nom:none
-RULE;(.*)er=>\1able; "Ver vers adj" (exemple: manger->mangeable);Ver:infinitif;adj:none
-RULE;(.*)ger=>\1geur; "Ver vers agent" (exemple: nager->nageur);Ver:infinitif;nom:agent
-RULE;(.*)ner=>\1naison; "Ver vers nomFeminin" (exemple: terminer->terminaison);Ver:infinitif;nom:feminin,singulier
-RULE;(.*)quer=>\1cation; "Ver vers nomFeminin" (exemple: comuniquer->comunication);Ver:infinitif;nom:feminin,singulier
-RULE;(.*)ser=>\1sation; "Ver vers nomFeminin" (exemple: casser->cassation);Ver:infinitif;nom:feminin,singulier
-RULE;(.*)quer=>\1quage; "Ver vers nomAction" (exemple: marquer->marquage);Ver:infinitif;nom:masculin,singulier,action
-RULE;(.*)er=>\1ement; "Ver vers nomFeminin" (exemple: noter->notement);Ver:infinitif;nom:feminin,singulier
-RULE;(.*)quer=>\1cation; "Ver vers nomFeminin" (exemple: comuniquer->comunication);Ver:infinitif;nom:feminin,singulier
-RULE;(.*)e => \1ale; "nomfem vers adjectifFem" (exemple: abysse->abyssale);nom:feminin,singulier;adj:feminin,singulier
-RULE;(.*) => \1al; "nomsing vers adjectifSing" (exemple: adverbe->adverbal);nom:masculin,singulier;adj:masculin,singulier
-RULE;(.*)al =>\1aux; "nomSG vers nomPL" (exemple: animal->animaux);nom:masculin,singulier;nom:masculin,pluriel
-RULE;(.*)ale =>\1ales; "adjSG vers adjPL" (exemple: abyssale->abyssales);adj:masculin,singulier;adj:masculin,pluriel
-RULE;(.*)=> \1elle; "nom vers adjsg" (exemple: accident->accidentelle);nom:masculin,singulier;adj:feminin,singulier
-RULE;(.*)elles => \1elle; "adjsg vers adjPL" (exemple: accidentelle->accidentelles);adj:feminin,singulier,singulier;adj:feminin,pluriel
-RULE;(.*)er => \1ance; "Ver vers nom" (exemple: briller->brillance);Ver:infinitif;nom:none
-RULE;(.*) => \1aire; "nom vers adjsg" (exemple: planet->planetaire);nom:masculin,singulier;adj:masculin,singulier
-RULE;(.*) => \1iaire; "nom vers nomAgent" (exemple: glacier->glaciaire);nom:masculin,singulier;adj:masculin,singulier
-RULE;(.*)aire => \1aires; "adjsg vers adjpl" (exemple: planetaire->planetaires);nom:masculin,singulier;adj:masculin,pluriel
-RULE;(.*)iaire => \1iaires; "nomsg vers nompl" (exemple: glaciaire->glaciaires);nom:masculin,singulier;adj:masculin,pluriel
-RULE;(.*) => \1acé; "nomsg vers adjsl" (exemple: rose->rosacé);nom:masculin,singulier;adj:masculin,singulier
-RULE;(.*)e => \1acés; "nomsg vers adjpl" (exemple: rose->rosacés);nom:masculin,singulier;adj:masculin,pluriel
-RULE;(.*) =>\1an; "nomsg vers adjsgm" (exemple: bresse->bressan);nom:masculin,singulier;adj:masculin,singulier
-RULE;(.*) => \1ane; "nomsg vers adjsgf" (exemple: bresse->bressane);nom:masculin,singulier;adj:feminin,singulier
-RULE;(.*)an => \1ans; "nomsg vers adjplm" (exemple: bresse->bressans);nom:masculin,singulier;adj:masculin,pluriel
-RULE;(.*)ane =>\1anes; "nomsg vers adjplf" (exemple: bresse->bressanes);nom:masculin,singulier;adj:feminin,pluriel
-RULE;(.*)ant =>\1amment; "adj vers adv" (exemple: abondant->abondament);adj:singulier,masculin;adv:singulier
-RULE;(.*)ante => \1amment; "adj vers adv" (exemple: abondante->abondament);adj:singulier,masculin;adv:singulier
-RULE;(.*)antes => \1amments; "adj vers adv" (exemple: abondantes->abondaments);adj:singulier,feminin;adv:pluriel
-RULE;(.*)ants => \1amments; "adj vers adv" (exemple: abondants->abondaments);adj:pluriel,feminin;adv:pluriel
-RULE;(.*)ants => \1amments; "adj vers nom" (exemple: actif->activitι);adj:singulier,masculin;nom:action
-RULE;(.*)ant => \1ance; "adj vers adv" (exemple: abondant->abondance);adj:singulier,masculin;adv:singulier
-RULE;(.*)ante => \1ance; "adj vers adv" (exemple: abondante->abondance);adj:singulier,masculin;adv:singulier
-RULE;(.*) => \1aine; "nom vers adj" (exemple: cuba ->cubaine);nom:masculin,singulier,lieu;adj:singulier,feminin
-RULE;(.*) => \1ain; "nom vers adj" (exemple: cuba ->cubain);nom:masculin,singulier,lieu;adj:singulier,masculin
-RULE;(.*) => \1ard; "nom vers adj" (exemple: riche ->richard);nom:masculin,singulier;adj:singulier,masculin
-RULE;(.*) => \1arde; "nom vers adj" (exemple: riche ->richarde);nom:masculin,singulier;adj:singulier,feminin
-
-
-
-
+RULE;(.*)ger=>\1gement; “Ver vers Nom” (exemple : déranger => dérangement);n_pos Ver:Inf;n_pos Nom:Mas+SG
+RULE;(.*)lir=>\1lissage; “Ver vers Nom” (exemple : remplir => remplissage );n_pos Ver:Inf;n_pos Nom:Mas+SG
+RULE;(.*)dir=>\1d; “Ver vers Nom” (exemple : rebondir =>rebond);n_pos Ver:Inf;n_pos Nom:Mas+SG
+RULE;(.*)ter=>\1tement; “Ver vers Nom” (exemple : endetter => endettement);n_pos Ver:Inf;n_pos Nom:Mas+SG
+RULE;(.*)eur => \1euse; “NomFeminin vers NomMasculin” (exemple : danseur->danseuse);n_pos Nom:Mas+SG;n_pos Nom:Fem+SG
+RULE;(.*)er=>\1ant;"Ver vers Adjectif" (exemple : choquer->choquant);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Adj:Mas+SG
+RULE;(.*)er=>\1ant;"Ver vers participe present" (exemple : donner->donnant);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:PPre+Mas+SG
+RULE;(.*)er=>\1e;"Ver vers Ver p1" (exemple : marcher->marche);n_pos Ver:Inf;n_pos Ver:SPre+SG+P1
+RULE;(.*)er=>\1e;"Ver vers Nom" (exemple : marcher->marche);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:Fem+SG
+RULE;(.*)ister=>\1istance;"Ver vers Nom" (exemple : resister->resistance);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:Fem+SG
+RULE;(.*)er=>\1able; "Ver vers Adj" (exemple: manger->mangeable);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Adj:Fem+SG
+RULE;(.*)ger=>\1geur; "Ver vers agent" (exemple: nager->nageur);n_pos Ver:Inf,n_data Ver:Groupe1;Y r_agent-1 X,n_pos Nom:Mas+SG
+RULE;(.*)ner=>\1naison; "Ver vers NomFeminin" (exemple: terminer->terminaison);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:Mas+SG
+RULE;(.*)quer=>\1cation; "Ver vers NomFeminin" (exemple: comuniquer->comunication);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:Fem+SG
+RULE;(.*)ser=>\1sation; "Ver vers NomFeminin" (exemple: casser->cassation);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:Fem+SG
+RULE;(.*)quer=>\1quage; "Ver vers NomAction" (exemple: marquer->marquage);n_pos Ver:Inf,n_data Ver:Groupe1;Y r_agent-1 X,n_pos Nom:Mas+SG
+RULE;(.*)er=>\1ement; "Ver vers NomFeminin" (exemple: noter->notement);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:Fem+SG
+RULE;(.*)quer=>\1cation; "Ver vers NomFeminin" (exemple: comuniquer->comunication);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Nom:Fem+SG
+RULE;(.*)e => \1ale; "Nomfem vers AdjectifFem" (exemple: abysse->abyssale);n_pos Nom:Fem+SG;n_pos Adj:Fem+SG
+RULE;(.*) => \1al; "Nomsing vers AdjectifSing" (exemple: adverbe->adverbal);n_pos Nom:Mas+SG;n_pos Adj:Mas+SG
+RULE;(.*)al =>\1aux; "NomSG vers NomPL" (exemple: animal->animaux);n_pos Nom:Mas+SG;n_pos Nom:Mas+PL
+RULE;(.*)ale =>\1ales; "AdjSG vers AdjPL" (exemple: abyssale->abyssales);n_pos Adj:Mas+SG;n_pos Adj:Mas+PL
+RULE;(.*)=> \1elle; "Nom vers Adjsg" (exemple: accident->accidentelle);n_pos Adj:Mas+SG;n_pos Adj:Fem+SG
+RULE;(.*)elles => \1elle; "Adjsg vers AdjPL" (exemple: accidentelle->accidentelles);n_pos Adj:Fem+SG;n_pos Adj:Mas+SG
+RULE;(.*)er => \1ance; "Ver vers Nom" (exemple: briller->brillance);n_pos Ver:Inf;n_pos Nom:Fem+SG
+RULE;(.*) => \1aire; "Nom vers Adjsg" (exemple: planet->planetaire);n_pos Nom:Mas+SG;n_pos Adj:Mas+SG
+RULE;(.*) => \1iaire; "Nom vers adj" (exemple: glacier->glaciaire);n_pos Nom:Mas+SG;n_pos Adj:Mas+SG
+RULE;(.*) => \1iaire; "Nom vers Nom" (exemple: glacier->glaciaire);n_pos Nom:Mas+SG;n_pos Nom:Mas+SG
+RULE;(.*)aire => \1aires; "Adjsg vers Adjpl" (exemple: planetaire->planetaires);n_pos Nom:Mas+SG;n_pos Nom:Mas+PL
+RULE;(.*)iaire => \1iaires; "Nomsg vers Nompl" (exemple: glaciaire->glaciaires);n_pos Nom:Mas+SG;n_pos Nom:Mas+PL
+RULE;(.*) => \1acé; "Nomsg vers Adjsl" (exemple: rose->rosacé);n_pos Nom:Mas+SG;n_pos Adj:Mas+SG
+RULE;(.*)e => \1acés; "Nomsg vers Adjpl" (exemple: rose->rosacés);n_pos Nom:Mas+SG;n_pos Adj:Mas+PL
+RULE;(.*) =>\1an; "Nomsg vers Adjsgm" (exemple: bresse->bressan);n_pos Nom:Mas+SG;n_pos Adj:Mas+SG
+RULE;(.*) => \1ane; "Nomsg vers Adjsgf" (exemple: bresse->bressane);n_pos Nom:Mas+SG;n_pos Adj:Fem+SG
+RULE;(.*)an => \1ans; "Nomsg vers Adjplm" (exemple: bresse->bressans);n_pos Nom:Mas+SG;n_pos Adj:Mas+PL;
+RULE;(.*)ane =>\1anes; "Nomsg vers Adjplf" (exemple: bresse->bressanes);n_pos Nom:Mas+SG;n_pos Adj:Fem+PL;
+RULE;(.*)ant =>\1amment; "Adj vers adv" (exemple: abondant->abondament);n_pos Adj:Mas+SG;n_pos Adv
+RULE;(.*)ante => \1amment; "Adj vers adv" (exemple: abondante->abondament);n_pos Adj:Mas+SG;n_pos Adv
+RULE;(.*)antes => \1amments; "Adj vers adv" (exemple: abondantes->abondaments);n_pos Adj:Fem+SG;n_pos Adv
+RULE;(.*)ants => \1amments; "Adj vers adv" (exemple: abondants->abondaments);n_pos Adj:Fem+PL;n_pos Adv
+RULE;(.*)ants => \1amments; "Adj vers Nom" (exemple: actif->activité);n_pos Adj:Mas+PL;n_pos Nom:Fem+SG
+RULE;(.*)ant => \1ance; "Adj vers adv" (exemple: abondant->abondance);n_pos Adj:Mas+PL;n_pos Adv
+RULE;(.*)ante => \1ance; "Adj vers adv" (exemple: abondante->abondance);n_pos Adj:Mas+PL;n_pos Adv
+RULE;(.*) => \1aine; "Nom vers Adj" (exemple: cuba ->cubaine);n_pos Nom:Mas+SG;n_pos Adj:Fem+SG
+RULE;(.*) => \1ain; "Nom vers Adj" (exemple: cuba ->cubain);n_pos Nom:Mas+SG;n_pos Adj:Mas+SG
+RULE;(.*) => \1ard; "Nom vers Adj" (exemple: riche ->richard);n_pos Nom:Mas+SG;n_pos Adj:Mas+SG
+RULE;(.*) => \1arde; "Nom vers Adj" (exemple: riche ->richarde);n_pos Nom:Mas+SG;n_pos Adj:Fem+SG
 WORD;chanter;n_pos Ver:Inf
 WORD;jardiner;n_pos Ver:Inf
+WORD;voler;n_pos Ver:Inf
+WORD;glacier;n_pos Nom:Mas+SG
+
+
+
+
