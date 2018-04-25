@@ -26,7 +26,7 @@ def parseWord(line):
     return TaggedWord(tokens[1], tokens[2])
 
 def parse_file():
- PATH = "./jdm"
+ PATH = "./regles"
  with open(PATH, "r") as myfile:
      fichier=myfile.read()
      lignes = fichier.split("\n")
