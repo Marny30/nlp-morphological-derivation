@@ -23,26 +23,26 @@ RULE;(.*)uire=>\1ctrice;“Ver vers agent” (exemple : conduire => conductrice)
 
 
 # Conjugaison #################################################################
-RULE;(.*)er=>\1e;"Ver G1 vers P1 indicatif présent" (exemple : chanter => chante);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)er=>\1es;"Ver G1 vers P2 indicatif présent" (exemple : chanter => chantes);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)er=>\1e;"Ver G1 vers P3 indicatif présent" (exemple : chanter => chante);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)er=>\1ons;"Ver G1 vers P4 indicatif présent" (exemple : chanter => chantons);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)er=>\1ez;"Ver G1 vers P5 indicatif présent" (exemple : chanter => chantez);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)er=>\1ent;"Ver G1 vers P6 indicatif présent" (exemple : chanter => chantent);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)er=>\1e;"Ver G1 vers P1 indicatif présent" (exemple : chanter => chante);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)er=>\1es;"Ver G1 vers P2 indicatif présent" (exemple : chanter => chantes);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)er=>\1e;"Ver G1 vers P3 indicatif présent" (exemple : chanter => chante);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)er=>\1ons;"Ver G1 vers P4 indicatif présent" (exemple : chanter => chantons);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)er=>\1ez;"Ver G1 vers P5 indicatif présent" (exemple : chanter => chantez);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)er=>\1ent;"Ver G1 vers P6 indicatif présent" (exemple : chanter => chantent);n_pos Ver:Inf,n_data Ver:Groupe1;n_pos Ver:Conjug,Y r_lemma X
 
-RULE;(.*)ir=>\1is;"Ver G2 vers P1 indicatif présent" (exemple : applaudir => applaudis);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)ir=>\1is;"Ver G2 vers P2 indicatif présent" (exemple : applaudir => applaudis);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)ir=>\1it;"Ver G2 vers P3 indicatif présent" (exemple : applaudir => applaudit);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)ir=>\1issons;"Ver G2 vers P4 indicatif présent" (exemple : applaudir => applaudissons);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)ir=>\1issez;"Ver G2 vers P5 indicatif présent" (exemple : applaudir => applaudissez);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)ir=>\1issent;"Ver G2 vers P6 indicatif présent" (exemple : applaudir => applaudissent);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)ir=>\1is;"Ver G2 vers P1 indicatif présent" (exemple : applaudir => applaudis);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)ir=>\1is;"Ver G2 vers P2 indicatif présent" (exemple : applaudir => applaudis);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)ir=>\1it;"Ver G2 vers P3 indicatif présent" (exemple : applaudir => applaudit);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)ir=>\1issons;"Ver G2 vers P4 indicatif présent" (exemple : applaudir => applaudissons);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)ir=>\1issez;"Ver G2 vers P5 indicatif présent" (exemple : applaudir => applaudissez);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)ir=>\1issent;"Ver G2 vers P6 indicatif présent" (exemple : applaudir => applaudissent);n_pos Ver:Inf,n_data Ver:Groupe2;n_pos Ver:Conjug,Y r_lemma X
 
-RULE;(.*)dre=>\1ds;"Ver G3 vers P1 indicatif présent" (exemple : prendre => prends);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)dre=>\1ds;"Ver G3 vers P2 indicatif présent" (exemple : prendre => prends);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)dre=>\1d;"Ver G3 vers P3 indicatif présent" (exemple : prendre => prend);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)dre=>\1ons;"Ver G3 vers P4 indicatif présent" (exemple : prendre => prenons);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)dre=>\1ez;"Ver G3 vers P5 indicatif présent" (exemple : prendre => prenez);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
-RULE;(.*)dre=>\1ent;"Ver G3 vers P6 indicatif présent" (exemple : prendre => prenent);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)dre=>\1ds;"Ver G3 vers P1 indicatif présent" (exemple : prendre => prends);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)dre=>\1ds;"Ver G3 vers P2 indicatif présent" (exemple : prendre => prends);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)dre=>\1d;"Ver G3 vers P3 indicatif présent" (exemple : prendre => prend);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)dre=>\1ons;"Ver G3 vers P4 indicatif présent" (exemple : prendre => prenons);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)dre=>\1ez;"Ver G3 vers P5 indicatif présent" (exemple : prendre => prenez);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
+# RULE;(.*)dre=>\1ent;"Ver G3 vers P6 indicatif présent" (exemple : prendre => prenent);n_pos Ver:Inf,n_data Ver:Groupe3;n_pos Ver:Conjug,Y r_lemma X
 
 # Verbe conjugué vers infinitif ###############################################
 RULE;(.*)e$=>\1er;"Verbe G1 conjugué P1 vers infinitif" (exemple : chante => chanter);n_pos Ver:Conjug,X r_lemma Y;n_data Ver:Groupe1,n_pos Ver:Inf
